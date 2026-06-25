@@ -121,6 +121,37 @@ function render_color_scheme_selector($name, $current = '') {
 // 3. ASSET ENQUEUING
 // ============================================================
 
+function zone5_meta_box_css(): string {
+    return '
+        .zone5-meta-box { padding: 0; }
+        .zone5-field { display: flex; flex-direction: column; gap: 6px; padding: 6px 0; }
+        .zone5-field:last-child { border-bottom: none; }
+        .zone5-field > label { font-weight: 600; color: #1d2327; font-size: 13px; }
+        .zone5-field input[type="text"],
+        .zone5-field input[type="email"],
+        .zone5-field input[type="number"],
+        .zone5-field select { max-width: 500px; }
+        .zone5-project-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .zone5-project-row select { flex: 1; max-width: 380px; }
+        .zone5-remove-project { background: none; border: 1px solid #d63638; color: #d63638; border-radius: 3px; cursor: pointer; padding: 3px 8px; font-size: 13px; line-height: 1.6; }
+        .zone5-remove-project:hover { background: #d63638; color: #fff; }
+        .zone5-field.zone5-conditional { display: none; }
+        .zone5-field.zone5-conditional.visible { display: flex; }
+        .zone5-checkbox-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+        .zone5-checkbox-row label { font-weight: 700; font-size: 13px; color: #1d2327; cursor: pointer; }
+        .zone5-image-preview { max-width: 120px; height: auto; display: block; margin-top: 8px; border-radius: 4px; }
+        .zone5-image-col { display: flex; flex-direction: column; }
+        .zone5-image-col .zone5-image-buttons { display: flex; gap: 8px; }
+        .zone5-icon-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+        .zone5-icon-option { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; padding: 8px; border: 2px solid #ddd; border-radius: 6px; min-width: 64px; }
+        .zone5-icon-option.is-selected { border-color: #2271b1; background: #f0f6fc; }
+        .zone5-icon-option:hover { border-color: #2271b1; }
+        .zone5-icon-preview { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+        .zone5-icon-preview svg { width: 100%; height: 100%; }
+        .zone5-icon-option span { font-size: 11px; color: #50575e; }
+    ';
+}
+
 // Enqueue styles and scripts
 function enqueue_assets()
 {
