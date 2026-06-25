@@ -81,7 +81,7 @@ Text Domain: zone5
 
     --section-padding-x: calc(var(--space-10) / 3 * 2);
     --section-padding-y: var(--space-20);
-    --section-padding: var(--section-padding-x) var(--section-padding-y);
+    --section-padding: var(--section-padding-y) var(--section-padding-x);
 
     /* Border radius */
     --border-radius-sm: 2px;
@@ -92,6 +92,7 @@ Text Domain: zone5
 
     /* Component Tokens */
     --header-height: calc(var(--space-12) + var(--space-3));
+    --header-logo-height: var(--space-12);
 }
 
 @keyframes opacity {
@@ -351,6 +352,8 @@ p:has(+ p) {
     padding: var(--section-padding);
 }
 
+
+
 .header-container {
     padding: 0 var(--section-padding-x);
 }
@@ -424,7 +427,11 @@ p:has(+ p) {
     bottom: var(--section-padding-x);
     left: 50%;
     transform: translateX(-50%);
-    width: var(--width-3);
+    z-index: 999;
+}
+
+.header__logo svg {
+    height: var(--header-logo-height);
 }
 
 .header.on-dark .header__logo {
@@ -520,6 +527,7 @@ p:has(+ p) {
 .section--hero .wp-block-group {
     position: relative;
     z-index: 1;
+    margin-bottom: calc(var(--section-padding-x) + var(--header-logo-height) + var(--space-15));
 }
 
 /* #endregion SECTION: HERO */
