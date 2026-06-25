@@ -12,39 +12,15 @@
         <section class="section section--hero section--full" data-header-theme="light">
             <div class="section-container">
                 <?php the_content_before_separator(); ?>
+
+
+                <a href="#home" class="hero__logo">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/svg/partner_logos.svg'); ?>
+                </a>    
             </div>
         </section>
 
-        <section class="section section--intro scheme-red" data-header-theme="light">
-            <div class="section-container">
-                <?php the_content_after_separator(1); ?>
-            </div>
-        </section>
-
-        <section class="section section--event scheme-grey" data-header-theme="dark">
-            <div class="section-container">
-                <?php the_content_after_separator(2); ?>
-            </div>
-        </section>
-
-        <section class="section section--form scheme-white" data-header-theme="dark">
-            <div class="section-container">
-                <?php the_content_after_separator(3); ?>
-            </div>
-        </section>
-
-
-        <section class="section section--video" data-header-theme="light">
-            <div class="section-container">
-                <?php the_content_after_separator(4); ?>
-            </div>
-        </section>
-
-        <section class="section section--faq" data-header-theme="light">
-            <div class="section-container">
-                <?php the_content_after_separator(5); ?>
-            </div>
-        </section>
+        <?php echo render_sections(get_the_content(), true); ?>
 
     <?php endif?>
 
