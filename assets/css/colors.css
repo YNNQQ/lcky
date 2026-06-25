@@ -1,15 +1,8 @@
 :root {
-    --color-black: #1D2121;
-    --color-black-rgba: rgba(29, 33, 33, 0.4);
-    --color-white: #F7FCFC;
-    --color-grey: #DEEDEB;
-    --color-dark-grey: #8C9998;
-    --color-dark-red: #500000;
-    --color-red: #FF6554;
-    --color-light-red: #FFD9C5;
-    --color-green: #00C48B;
-    --color-dark-green: #004036;
-    --color-light-green: #D8F5DB;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-grey: #F8F8F8;
+    --color-red: #FF3001;
 }
 
 /* COLOR SCHEMES */
@@ -17,7 +10,7 @@
 .scheme-white {
     --scheme-bg: var(--color-white);
     --scheme-text: var(--color-black);
-    --scheme-accent: var(--color-dark-grey);
+    --scheme-accent: var(--color-red);
     --scheme-solid-bg: var(--color-black);
     --scheme-solid-text: var(--color-white);
     --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
@@ -29,9 +22,9 @@
 .scheme-black {
     --scheme-bg: var(--color-black);
     --scheme-text: var(--color-white);
-    --scheme-accent: var(--color-light-grey);
+    --scheme-accent: var(--color-red);
     --scheme-solid-bg: var(--color-white);
-    --scheme-solid-text: var(--color-dark-grey);
+    --scheme-solid-text: var(--color-black);
     --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
     background-color: var(--scheme-bg);
     color: var(--scheme-text);
@@ -41,21 +34,9 @@
 .scheme-grey {
     --scheme-bg: var(--color-grey);
     --scheme-text: var(--color-black);
-    --scheme-accent: var(--color-dark-grey);
-    --scheme-solid-bg: var(--color-dark-grey);
+    --scheme-accent: var(--color-red);
+    --scheme-solid-bg: var(--color-black);
     --scheme-solid-text: var(--color-white);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-dark-grey {
-    --scheme-bg: var(--color-dark-grey);
-    --scheme-text: var(--color-white);
-    --scheme-accent: var(--color-grey);
-    --scheme-solid-bg: var(--color-white);
-    --scheme-solid-text: var(--color-dark-grey);
     --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
     background-color: var(--scheme-bg);
     color: var(--scheme-text);
@@ -64,70 +45,10 @@
 
 .scheme-red {
     --scheme-bg: var(--color-red);
-    --scheme-text: var(--color-light-red);
-    --scheme-accent: var(--color-dark-red);
-    --scheme-solid-bg: var(--color-dark-red);
-    --scheme-solid-text: var(--color-light-red);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-dark-red {
-    --scheme-bg: var(--color-dark-red);
-    --scheme-text: var(--color-light-red);
-    --scheme-accent: var(--color-red);
-    --scheme-solid-bg: var(--color-red);
-    --scheme-solid-text: var(--color-dark-red);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-light-red {
-    --scheme-bg: var(--color-light-red);
-    --scheme-text: var(--color-dark-red);
-    --scheme-accent: var(--color-red);
-    --scheme-solid-bg: var(--color-red);
-    --scheme-solid-text: var(--color-light-red);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-green {
-    --scheme-bg: var(--color-green);
-    --scheme-text: var(--color-light-green);
-    --scheme-accent: var(--color-dark-green);
-    --scheme-solid-bg: var(--color-dark-green);
-    --scheme-solid-text: var(--color-light-green);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-light-green {
-    --scheme-bg: var(--color-light-green);
-    --scheme-text: var(--color-dark-green);
-    --scheme-accent: var(--color-green);
-    --scheme-solid-bg: var(--color-dark-green);
-    --scheme-solid-text: var(--color-light-green);
-    --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
-    background-color: var(--scheme-bg);
-    color: var(--scheme-text);
-    fill: var(--scheme-text);
-}
-
-.scheme-dark-green {
-    --scheme-bg: var(--color-dark-green);
-    --scheme-text: var(--color-light-green);
-    --scheme-accent: var(--color-green);
-    --scheme-solid-bg: var(--color-green);
-    --scheme-solid-text: var(--color-dark-green);
+    --scheme-text: var(--color-white);
+    --scheme-accent: var(--color-black);
+    --scheme-solid-bg: var(--color-white);
+    --scheme-solid-text: var(--color-black);
     --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
     background-color: var(--scheme-bg);
     color: var(--scheme-text);
