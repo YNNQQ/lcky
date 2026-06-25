@@ -46,7 +46,7 @@
 .scheme-red {
     --scheme-bg: var(--color-red);
     --scheme-text: var(--color-white);
-    --scheme-accent: var(--color-black);
+    --scheme-accent: var(--color-white);
     --scheme-solid-bg: var(--color-white);
     --scheme-solid-text: var(--color-black);
     --scheme-opacity: color-mix(in srgb, var(--scheme-text) 35%, transparent);
