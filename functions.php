@@ -377,14 +377,23 @@ function get_first_block($post = null)
   return '';
 }
 
-function render_sections($content) {
+function render_sections($content, $skip_before_first_separator = false) {
     $blocks = parse_blocks($content);
     $output = '';
+    $past_separator = !$skip_before_first_separator;
 
     foreach ($blocks as $block) {
 
         // Skip empty blocks
         if (empty($block['blockName']) && trim($block['innerHTML'] ?? '') === '') {
+            continue;
+        }
+
+        // Skip everything up to and including the first separator
+        if (!$past_separator) {
+            if ($block['blockName'] === 'core/separator') {
+                $past_separator = true;
+            }
             continue;
         }
 
