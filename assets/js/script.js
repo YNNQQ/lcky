@@ -128,97 +128,19 @@
             return extraProps;
         }
     );
-
-    /* ── 4. Hero image animation ── */
-
-    const IMG_ANIMATIONS = [
-        { label: '— None —',    value: '' },
-        { label: 'Zoom in',     value: 'img-zoom-in' },
-        { label: 'Zoom out',    value: 'img-zoom-out' },
-        { label: 'Move left',   value: 'img-move-left' },
-        { label: 'Move right',  value: 'img-move-right' },
-        { label: 'Move up',     value: 'img-move-up' },
-        { label: 'Move down',   value: 'img-move-down' },
-    ];
-
-    // 4a. Register imgAnimation attribute on core/image
-    addFilter(
-        'blocks.registerBlockType',
-        'theme/image-animation-attribute',
-        function (settings, name) {
-            if (name !== 'core/image') return settings;
-            settings.attributes = Object.assign({}, settings.attributes, {
-                imgAnimation: { type: 'string', default: '' },
-            });
-            return settings;
-        }
-    );
-
-    // 4b. Inspector panel — only show when the image is inside a hero gallery
-    addFilter(
-        'editor.BlockEdit',
-        'theme/image-animation-control',
-        createHigherOrderComponent(function (BlockEdit) {
-            return function (props) {
-                if (props.name !== 'core/image') return el(BlockEdit, props);
-
-                const { attributes, setAttributes, clientId } = props;
-
-                // Walk up: image → gallery → column → columns
-                // Show control only when an ancestor columns block has section--hero in its className
-                const ancestors = wp.data
-                    .select('core/block-editor')
-                    .getBlockParents(clientId);
-
-                const isHero = ancestors.some(function (id) {
-                    const block = wp.data.select('core/block-editor').getBlock(id);
-                    if (!block) return false;
-                    const cls = block.attributes && block.attributes.className || '';
-                    return cls.includes('section--hero');
-                });
-
-                if (!isHero) return el(BlockEdit, props);
-
-                return el(
-                    Fragment,
-                    {},
-                    el(BlockEdit, props),
-                    el(
-                        InspectorControls,
-                        {},
-                        el(
-                            PanelBody,
-                            { title: 'Image animation', initialOpen: true },
-                            el(SelectControl, {
-                                label: 'Animation',
-                                value: attributes.imgAnimation,
-                                options: IMG_ANIMATIONS,
-                                onChange: function (value) {
-                                    setAttributes({ imgAnimation: value });
-                                },
-                            })
-                        )
-                    )
-                );
-            };
-        })
-    );
-
-    // 4c. Persist imgAnimation as a class on the saved <figure>
-    addFilter(
-        'blocks.getSaveContent.extraProps',
-        'theme/image-animation-class',
-        function (extraProps, blockType, attributes) {
-            if (blockType.name !== 'core/image') return extraProps;
-            if (attributes.imgAnimation) {
-                extraProps.className = [
-                    extraProps.className,
-                    attributes.imgAnimation,
-                ]
-                    .filter(Boolean)
-                    .join(' ');
-            }
-            return extraProps;
-        }
-    );
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // All section-containers except the project-content one (disabled)
+    document.querySelectorAll('main .section-container')
+        .forEach(el => observer.observe(el));
+});
