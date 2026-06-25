@@ -14,18 +14,30 @@ Text Domain: zone5
 @import url("assets/css/colors.css");
 
 @font-face {
-    font-family: 'Haffer';
-    src: url('assets/fonts/Haffer-Regular.woff2') format('woff2'),
-        url('assets/fonts/Haffer-Regular.woff') format('woff');
+    font-family: 'FBSFunegral';
+    src: url('assets/fonts/FBSFunegral-Squeezed.otf') format('opentype');
     font-weight: 400;
+    font-style: squeezed;
+}
+
+@font-face {
+    font-family: 'FBSFunegral';
+    src: url('assets/fonts/FBSFunegral-SuperSqueezed.otf') format('opentype');
+    font-weight: 400;
+    font-style: super-squeezed;
+}
+
+@font-face {
+    font-family: 'MonoSpec';
+    src: url('assets/fonts/MonoSpec-Medium.otf') format('opentype');
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Haffer';
-    src: url('assets/fonts/Haffer-Medium.woff2') format('woff2'),
-        url('assets/fonts/Haffer-Medium.woff') format('woff');
-    font-weight: 500;
+    font-family: 'MonoSpec';
+    src: url('assets/fonts/MonoSpec-Light.otf') format('opentype');
+    font-weight: 100;
     font-style: normal;
 }
 
