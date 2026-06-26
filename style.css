@@ -148,7 +148,7 @@ main {
     position: relative;
 }
 
-section:not(.section--full) {
+section:not(.section--hero) {
     width: 100%;
     box-sizing: border-box;
     margin: auto;
@@ -546,14 +546,14 @@ p:has(+ p) {
 /* ============================================================ */
 /* #region REPEATING SECTIONS */
 
-.section--full {
+.section--hero {
     position: sticky;
     top: 0;
     width: 100%;
     height: 100svh;
 }
 
-.section--full.section--hero .section-container {
+.section--hero .section-container {
     opacity: 1;
 }
 
@@ -565,8 +565,8 @@ p:has(+ p) {
 }
 
 .section--full .wp-block-columns,
-.section--full figure {
-    height: 100%;
+.section--full .wp-block-column > figure {
+    height: -webkit-fill-available;
 }
 
 .section--center .section-container>.wp-block-columns>.wp-block-column {
@@ -778,7 +778,7 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     height: var(--text-base) !important;
 }
 
-.section--form input[type="checkbox"]:checked + label .go2365489600::after {
+.section--form input[type="checkbox"]:checked+label .go2365489600::after {
     display: block !important;
 }
 
@@ -808,3 +808,27 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
 }
 
 /* #endregion SECTION: FORM */
+
+
+/* ============================================================ */
+/* #region SECTION: BANNER */
+
+.section--banner .wp-block-column {
+    position: relative;
+}
+
+.section--banner .wp-block-group {
+    position: absolute;
+    inset: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.section--banner .wp-block-group__inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-10);
+}
