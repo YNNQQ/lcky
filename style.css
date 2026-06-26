@@ -17,14 +17,14 @@ Text Domain: zone5
     font-family: 'FBSFunegral';
     src: url('assets/fonts/FBSFunegral-Squeezed.otf') format('opentype');
     font-weight: 400;
-    font-style: squeezed;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'FBSFunegral';
+    font-family: 'FBSFunegral-SS';
     src: url('assets/fonts/FBSFunegral-SuperSqueezed.otf') format('opentype');
     font-weight: 400;
-    font-style: super-squeezed;
+    font-style: normal;
 }
 
 @font-face {
@@ -46,8 +46,9 @@ Text Domain: zone5
     --text-xs: 12px;
     --text-sm: 15px;
     --text-base: 18px;
-    --text-lg: 48px;
-    --text-xl: 72px;
+    --text-lg: 32px;
+    --text-xl: 48px;
+    --text-2xl: 72px;
 
     /* Typography - Line Height */
     --leading-tight: 1;
@@ -230,14 +231,22 @@ input:-moz-autofill {
 /* #region TYPOGRAPHY */
 
 .h1,
-h1,
+h1 {
+    font-family: 'FBSFunegral', Arial, Helvetica, sans-serif;
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    text-transform: uppercase;
+    padding: 14px var(--space-3);
+    border: 1px solid var(--scheme-accent);
+}
+
 .h2,
 h2 {
     font-family: 'FBSFunegral', Arial, Helvetica, sans-serif;
     font-size: var(--text-xl);
     font-weight: 400;
     line-height: var(--leading-tight);
-    font-style: squeezed;
     text-transform: uppercase;
     padding: 14px var(--space-3);
     border: 1px solid var(--scheme-accent);
@@ -246,10 +255,10 @@ h2 {
 .h3,
 .h3>*,
 h3 {
+    font-family: 'FBSFunegral-SS', Arial, Helvetica, sans-serif;
     font-size: var(--text-lg);
     font-weight: 400;
     line-height: var(--leading-tight);
-    font-style: super-squeezed;
     text-transform: uppercase;
     padding: 14px var(--space-3);
     border: 1px solid var(--scheme-accent);
@@ -274,9 +283,10 @@ span {
 }
 
 .h5,
-h5 {
+h5,
+.nav-menu a {
     font-size: var(--text-sm);
-    font-weight: 100;
+    font-weight: 500;
     line-height: var(--leading-relaxed);
 }
 
@@ -347,11 +357,15 @@ p:has(+ p) {
 }
 
 .section:not(.section--full) .section-container:not(:has(+ .section-container)):not(:has(>[class*="scheme-"])),
-.section:not(.section--full) .section-container .wp-block-columns[class*="scheme-"] {
+.section:not(.section--full) .section-container .wp-block-columns[class*="scheme-"]:not(:has(.wp-block-column[class*="scheme-"])) {
     width: 100%;
     padding: var(--section-padding);
 }
 
+.section:not(.section--full) .section-container .wp-block-columns[class*="scheme-"] .wp-block-column[class*="scheme-"] {
+    width: 100%;
+    padding: var(--section-padding-y);
+}
 
 
 .header-container {
@@ -376,6 +390,7 @@ p:has(+ p) {
 /* Buttons */
 
 .wp-block-button .wp-element-button {
+    all: unset;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -406,6 +421,34 @@ p:has(+ p) {
 }
 
 
+/* Heading blocks */
+
+.title {
+    gap: calc(var(--space-1) / 2 + var(--space-2));
+    color: var(--scheme-accent);
+    margin-bottom: var(--space-15);
+}
+
+.title .wp-block-heading {
+    padding: 0;
+    border: none;
+    margin-top: -0.18em;
+    padding-bottom: 0.05em;
+    margin-bottom: -0.12em;
+}
+
+.title .wp-block-group {
+    align-items: flex-start;
+    border: var(--scheme-accent) 2px solid;
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-1) calc(var(--space-10) / 6);
+}
+
+.title .wp-block-group h3 {
+    line-height: 0.88;
+    margin-top: -0.18rem;
+}
+
 
 /* #endregion LAYOUT */
 
@@ -420,6 +463,7 @@ p:has(+ p) {
     position: fixed;
     top: var(--section-padding-x);
     z-index: 1;
+    mix-blend-mode: difference;
 }
 
 .header__logo {
@@ -443,6 +487,14 @@ p:has(+ p) {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-container ul li {
+    color: var(--color-white);
+}
+
+.header__logo svg path {
+    fill: var(--color-white);
 }
 
 /* FOOTER */
@@ -530,4 +582,34 @@ p:has(+ p) {
     margin-bottom: calc(var(--section-padding-x) + var(--header-logo-height) + var(--space-15));
 }
 
+.section--hero .wp-block-group>* {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
 /* #endregion SECTION: HERO */
+
+
+/* ============================================================ */
+/* #region SECTION: EVENT */
+
+.section--event .wp-block-columns {
+    position: relative;
+    gap: 0;
+}
+
+.section--event .wp-block-columns::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "FBSFunegral", Arial, Helvetica, sans-serif;
+    font-size: 128px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--scheme-accent);
+}
+
+/* #endregion SECTION: EVENT */
