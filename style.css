@@ -512,14 +512,35 @@ h2,
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
-    will-change: clip-path;
 }
 
-/* Clone driven entirely by JS — bottom: 0 so translateY controls vertical position */
-.header__logo--clone {
-    bottom: 0;
+/*
+ * Logo clip containers — pure CSS scroll masking
+ *
+ * Both .site-main and .footer are positioned ancestors. Each holds a .logo-clip
+ * div that is stretched to fill its parent (position: absolute; inset: 0) and
+ * carries clip-path: inset(0 0 0 0). Any position: fixed child inside is still
+ * painted at its normal viewport position, but its rendering is clipped to the
+ * container's on-screen bounding box.
+ *
+ * Because .site-main ends exactly where .footer begins, their clip boxes are
+ * always complementary: main clips the top portion of the logo, footer clips
+ * the bottom — together they always show exactly one complete logo.
+ */
+.logo-clip {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 0 0);
     pointer-events: none;
-    will-change: transform, clip-path;
+    z-index: 999;
+}
+
+.logo-clip > .header__logo {
+    pointer-events: auto;
+}
+
+.footer {
+    position: relative;
 }
 
 .header__logo svg {

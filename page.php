@@ -8,6 +8,14 @@
 <main class="site-main scheme-red">
 
     <?php if (is_front_page()): ?>
+    <div class="logo-clip">
+        <a href="#home" class="header__logo">
+            <?php echo file_get_contents(get_template_directory() . '/assets/svg/logo.svg'); ?>
+        </a>
+    </div>
+    <?php endif; ?>
+
+    <?php if (is_front_page()): ?>
             
         <section class="section section--hero section--full" data-header-theme="light">
             <div class="section-container">

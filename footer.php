@@ -1,4 +1,13 @@
 <footer class="footer scheme-red" id="site-footer">
+
+    <?php if (is_front_page()): ?>
+    <div class="logo-clip">
+        <a href="#home" class="header__logo">
+            <?php echo file_get_contents(get_template_directory() . '/assets/svg/logo.svg'); ?>
+        </a>
+    </div>
+    <?php endif; ?>
+
     <div class="footer-container">
 
         <?php wp_nav_menu([
