@@ -7,10 +7,10 @@ const GRAIN = {
     textureSize: 200,
 
     // Overall opacity of the overlay (0–1)
-    opacity: 0.1,
+    opacity: 0.05,
 
     // Animation duration — lower = faster flicker (css seconds)
-    speed: '0.4s',
+    speed: '0.1s',
 
     // CSS mix-blend-mode
     blendMode: 'multiply',
