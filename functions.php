@@ -181,6 +181,15 @@ function enqueue_assets()
         true
     );
 
+    // Logo scroll handoff
+    wp_enqueue_script(
+        'zone5-logo-scroll',
+        get_template_directory_uri() . '/assets/js/logo-scroll.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/logo-scroll.js'),
+        true
+    );
+
     // Expose color schemes to JS
     wp_localize_script(
         'zone5-script',
