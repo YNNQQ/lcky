@@ -542,18 +542,26 @@ h2,
 .footer-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    justify-content: center;
+    gap: var(--space-20);
 }
 
-.footer .footer-container a {
-    color: var(--scheme-text);
-    transition: var(--animation-hover);
+.footer__tagline {
+    text-align: center;
 }
 
-.footer .footer-container a:hover {
-    color: var(--scheme-accent);
+.footer__bottom {
+    align-items: center;
 }
+
+.footer__bottom > :nth-child(2) {
+    text-align: center;
+}
+
+.footer__bottom > :last-child {
+    text-align: right;
+}
+
 
 /* Bottom bar */
 
