@@ -172,6 +172,15 @@ function enqueue_assets()
         true
     );
 
+    // Logo scroll — footer logo bottom tracking (clip masking is pure CSS)
+    wp_enqueue_script(
+        'zone5-logo-scroll',
+        get_template_directory_uri() . '/assets/js/logo-scroll.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/logo-scroll.js'),
+        true
+    );
+
     // Grain overlay
     wp_enqueue_script(
         'zone5-grain',

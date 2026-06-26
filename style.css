@@ -264,7 +264,8 @@ h3 {
 .h4,
 h4,
 summary,
-.nav-menu a {
+.nav-menu a,
+.footer__tagline a {
     font-size: var(--text-base);
     font-weight: 500;
     line-height: var(--leading-normal);
@@ -290,10 +291,15 @@ h5 {
 
 .h6,
 h6,
-.wp-element-caption {
+.wp-element-caption,
+.footer__bottom * {
     font-size: var(--text-xs);
     font-weight: 100;
     line-height: var(--leading-relaxed);
+}
+
+.footer__bottom :nth-child(2) {
+    font-weight: 500;
 }
 
 p:has(+ p) {
@@ -512,25 +518,12 @@ h2,
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
+    mix-blend-mode: difference;
 }
 
-/*
- * Logo clip containers — pure CSS scroll masking
- *
- * Both .site-main and .footer are positioned ancestors. Each holds a .logo-clip
- * div that is stretched to fill its parent (position: absolute; inset: 0) and
- * carries clip-path: inset(0 0 0 0). Any position: fixed child inside is still
- * painted at its normal viewport position, but its rendering is clipped to the
- * container's on-screen bounding box.
- *
- * Because .site-main ends exactly where .footer begins, their clip boxes are
- * always complementary: main clips the top portion of the logo, footer clips
- * the bottom — together they always show exactly one complete logo.
- */
 .logo-clip {
     position: absolute;
     inset: 0;
-    clip-path: inset(0 0 0 0);
     pointer-events: none;
     z-index: 999;
 }
@@ -547,7 +540,11 @@ h2,
     height: var(--header-logo-height);
 }
 
-.header.on-dark .header__logo {
+.header__logo svg path {
+    fill: var(--color-black);
+}
+
+.header__logo.on-dark svg path {
     fill: var(--color-white);
 }
 
@@ -562,11 +559,11 @@ h2,
     color: var(--color-white);
 }
 
-.header__logo svg path {
+/* FOOTER */
+
+.footer .header__logo svg path {
     fill: var(--color-white);
 }
-
-/* FOOTER */
 
 .footer-container {
     display: flex;

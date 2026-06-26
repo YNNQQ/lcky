@@ -1,96 +1,55 @@
 /**
  * Logo scroll handoff
  *
- * The original .header__logo is fixed at the bottom of the viewport.
- * As the footer scrolls up and its top edge crosses the logo's bottom edge,
- * we clip logo1 from below (making it appear to slide behind the footer) while
- * simultaneously revealing a clone (logo2) from the same edge — so the two
- * together always look like one complete logo.
+ * Two logos exist in the DOM — one inside .site-main, one inside .footer —
+ * both position:fixed at the same coordinates. JS drives complementary
+ * clip-path values so together they always show exactly one complete logo,
+ * and the footer logo's bottom position tracks upward to STOP once the
+ * handoff completes.
  *
- * Once logo2 is fully visible it continues tracking the footer's top edge
- * upward until it reaches STOP_OFFSET px above the viewport bottom, where it
- * locks in place.
- *
- * Masking logic
- * ─────────────
- * overlap  = how many px of logo1's bottom are below the footer's top edge
- * logo1    clips: inset(0 0 overlap 0)          — hides bottom `overlap` px
- * logo2    clips: inset(logoH - overlap 0 0 0)  — hides everything EXCEPT bottom `overlap` px
- *
- * The two masks are always complementary: logo1_visible + logo2_visible = logoH (one full logo).
- *
- * Positioning
- * ───────────
- * logo2 has  `bottom: 0`  in CSS and JS drives vertical position with translateY.
- * translateY = -(distance from viewport bottom to footer's top edge),
- * capped so the logo never rises above STOP_OFFSET from the bottom.
+ * Using JS for the clip (rather than CSS clip-path on the container) because
+ * clipping position:fixed children via an ancestor's clip-path is not
+ * consistent across browsers.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const logo1  = document.querySelector('.header__logo');
-    const footer = document.getElementById('site-footer');
-    if (!logo1 || !footer) return;
+    const footer     = document.getElementById('site-footer');
+    const footerLogo = footer?.querySelector('.logo-clip > .header__logo');
+    const mainLogo   = document.querySelector('.site-main .logo-clip > .header__logo');
 
-    // ── Clone ──────────────────────────────────────────────────────────────
-    // Deep-clone logo1 so dimensions, SVG content, and styles are identical.
-    const logo2 = logo1.cloneNode(true);
-    logo2.classList.add('header__logo--clone');
-    logo2.setAttribute('aria-hidden', 'true');
-    logo2.setAttribute('tabindex', '-1');
-    // Start fully hidden; the update loop takes it from here.
-    logo2.style.clipPath  = 'inset(100% 0 0 0)';
-    logo2.style.transform = 'translateX(-50%) translateY(0)';
-    document.body.appendChild(logo2);
+    if (!footer || !footerLogo || !mainLogo) return;
 
-    // How far above the viewport bottom logo2 stops rising.
-    const STOP_OFFSET = 300; // px
+    const STOP    = 300;
+    const PADDING = window.innerHeight - mainLogo.getBoundingClientRect().bottom;
 
-    // ── Update ─────────────────────────────────────────────────────────────
     function update() {
-        const fRect = footer.getBoundingClientRect();
-        const lRect = logo1.getBoundingClientRect();
-        const logoH = lRect.height;
+        const fTop    = footer.getBoundingClientRect().top;
+        const logoH   = mainLogo.offsetHeight;
+        const logoBot = window.innerHeight - PADDING;
 
-        // Pixels of logo1's bottom that sit below the footer's top edge.
-        const overlap = Math.max(0, lRect.bottom - fRect.top);
+        // Pixels of the logo zone the footer's top edge has crossed
+        const overlap = Math.max(0, logoBot - fTop);
 
-        // ── logo1: clip its bottom `overlap` pixels ──────────────────────
-        logo1.style.clipPath = overlap > 0 ? `inset(0 0 ${overlap}px 0)` : '';
+        // Main logo: clip the bottom `overlap` px behind the footer
+        mainLogo.style.clipPath = overlap > 0 ? `inset(0 0 ${overlap}px 0)` : '';
 
-        // ── logo2: mirror clip + vertical tracking ───────────────────────
-        if (overlap <= 0) {
-            // Footer hasn't reached the logo yet.
-            // Pre-position logo2 exactly behind logo1 so the first visible
-            // frame is seamless (no pop when overlap hits 1px).
-            const distBottom = window.innerHeight - lRect.bottom;
-            logo2.style.transform = `translateX(-50%) translateY(${-distBottom}px)`;
-            logo2.style.clipPath   = 'inset(100% 0 0 0)';
-            return;
-        }
+        // Footer logo: reveal only the bottom `overlap` px (complementary mask)
+        footerLogo.style.clipPath = `inset(${Math.max(0, logoH - overlap)}px 0 0 0)`;
 
-        // Logo2's bottom edge follows the footer's top edge upward,
-        // but stops once it reaches STOP_OFFSET above the viewport bottom.
-        const distFromBottom = Math.min(window.innerHeight - fRect.top, STOP_OFFSET);
-        logo2.style.transform = `translateX(-50%) translateY(${-distFromBottom}px)`;
-
-        // Complementary mask: show only the `overlap` bottom pixels.
-        const hideTop = Math.max(0, logoH - overlap);
-        logo2.style.clipPath = hideTop > 0 ? `inset(${hideTop}px 0 0 0)` : '';
+        // Footer logo bottom: stay at PADDING during handoff, then rise to STOP
+        const bottom = overlap <= logoH
+            ? PADDING
+            : PADDING + Math.min(overlap - logoH, STOP - PADDING);
+        footerLogo.style.bottom = bottom + 'px';
     }
 
-    // rAF-throttled scroll + resize listeners
-    let rafId = null;
-
-    function scheduleUpdate() {
-        if (rafId) return;
-        rafId = requestAnimationFrame(() => {
-            update();
-            rafId = null;
-        });
+    let raf = null;
+    function schedule() {
+        if (raf) return;
+        raf = requestAnimationFrame(() => { update(); raf = null; });
     }
 
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate, { passive: true });
-
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
     update();
 });

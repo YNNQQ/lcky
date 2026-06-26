@@ -144,3 +144,52 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('main .section-container')
         .forEach(el => observer.observe(el));
 });
+
+// Header scheme-aware theme toggle
+// Reads the scheme-* class of whatever element sits at the header's bottom
+// edge and toggles .on-dark on the header accordingly.
+//   scheme-white / scheme-grey → logo fill black  (light background)
+//   scheme-black / scheme-red  → logo fill white  (dark background, .on-dark)
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header__logo');
+    if (!header) return;
+
+    const DARK_SCHEMES = new Set(['scheme-black', 'scheme-red']);
+
+    // Kill transitions briefly during the toggle to prevent fill animating
+    // through intermediate colors when scrolling quickly between sections.
+    const logoSvg  = header.querySelector('.header__logo svg');
+    const transEls = [logoSvg].filter(Boolean);
+
+    function instantToggle(fn) {
+        transEls.forEach(el => { el.style.transition = 'none'; });
+        void header.offsetHeight;
+        fn();
+        requestAnimationFrame(() => {
+            transEls.forEach(el => { el.style.transition = ''; });
+        });
+    }
+
+    function updateHeaderTheme() {
+        // Sample the element stack at the horizontal centre, one px below
+        // the header's bottom edge (viewport coordinates).
+        const scanX    = window.innerWidth / 2;
+        const scanY    = header.getBoundingClientRect().bottom + 1;
+        const elements = document.elementsFromPoint(scanX, scanY);
+
+        for (const el of elements) {
+            if (el === header || header.contains(el)) continue;
+            const scheme = [...el.classList].find(c => c.startsWith('scheme-'));
+            if (scheme) {
+                instantToggle(() => {
+                    header.classList.toggle('on-dark', DARK_SCHEMES.has(scheme));
+                });
+                return;
+            }
+        }
+    }
+
+    window.addEventListener('scroll', updateHeaderTheme, { passive: true });
+    window.addEventListener('resize', updateHeaderTheme, { passive: true });
+    updateHeaderTheme();
+});
