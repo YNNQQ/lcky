@@ -1,70 +1,71 @@
+// ============================================================
+// GRAIN OVERLAY — tune these values
+// ============================================================
+
 const GRAIN = {
-    // Pixel size of each grain dot (1 = sharpest, higher = coarser)
-    size: 0.5,
+    // Tile size in px — smaller = finer grain texture
+    textureSize: 200,
 
-    // How fast the grain shifts. Lower = faster (1 = every frame, 3 = every 3rd frame)
-    speed: 1,
-
-    // Overall opacity of the canvas overlay (0–1)
+    // Overall opacity of the overlay (0–1)
     opacity: 0.1,
 
-    // CSS mix-blend-mode — 'overlay' gives the most cinematic look;
-    // try 'multiply', 'screen', or 'soft-light' for different moods
+    // Animation duration — lower = faster flicker (css seconds)
+    speed: '0.4s',
+
+    // CSS mix-blend-mode
     blendMode: 'multiply',
 };
 
 // ============================================================
-// Implementation — no need to edit below
-// ============================================================
 
 (function () {
+    // Generate a small noise tile once
     const canvas = document.createElement('canvas');
-    canvas.id = 'grain';
+    canvas.width  = GRAIN.textureSize;
+    canvas.height = GRAIN.textureSize;
+    const ctx  = canvas.getContext('2d');
+    const data = ctx.createImageData(GRAIN.textureSize, GRAIN.textureSize);
 
-    Object.assign(canvas.style, {
-        position: 'fixed',
-        inset: '0',
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: '9999',
-        opacity: GRAIN.opacity,
-        mixBlendMode: GRAIN.blendMode,
-    });
-
-    document.body.appendChild(canvas);
-
-    const ctx = canvas.getContext('2d');
-    let frame = 0;
-    let imageData;
-
-    function resize() {
-        canvas.width = Math.ceil(window.innerWidth / GRAIN.size);
-        canvas.height = Math.ceil(window.innerHeight / GRAIN.size);
-        imageData = ctx.createImageData(canvas.width, canvas.height);
+    for (let i = 0; i < data.data.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        data.data[i]     = v;
+        data.data[i + 1] = v;
+        data.data[i + 2] = v;
+        data.data[i + 3] = 255;
     }
 
-    function draw() {
-        const data = imageData.data;
-        const len = data.length;
+    ctx.putImageData(data, 0, 0);
+    const url = canvas.toDataURL();
 
-        for (let i = 0; i < len; i += 4) {
-            const v = (Math.random() * 255) | 0;
-            data[i] = v; // R
-            data[i + 1] = v; // G
-            data[i + 2] = v; // B
-            data[i + 3] = 255;
+    // Inject keyframes + overlay via a single style tag
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes grain {
+            0%  { transform: translate(0, 0); }
+            20% { transform: translate(-10%, -15%); }
+            40% { transform: translate(5%, 10%); }
+            60% { transform: translate(-5%, 5%); }
+            80% { transform: translate(10%, -5%); }
+            100%{ transform: translate(0, 0); }
         }
+        #grain {
+            position: fixed;
+            inset: -20%;
+            width: 140%;
+            height: 140%;
+            background-image: url('${url}');
+            background-repeat: repeat;
+            opacity: ${GRAIN.opacity};
+            mix-blend-mode: ${GRAIN.blendMode};
+            pointer-events: none;
+            z-index: 9999;
+            animation: grain ${GRAIN.speed} steps(1) infinite;
+            will-change: transform;
+        }
+    `;
+    document.head.appendChild(style);
 
-        ctx.putImageData(imageData, 0, 0);
-    }
-
-    function loop() {
-        if (++frame % GRAIN.speed === 0) draw();
-        requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-    loop();
+    const el = document.createElement('div');
+    el.id = 'grain';
+    document.body.appendChild(el);
 })();
