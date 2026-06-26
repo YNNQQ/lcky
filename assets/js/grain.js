@@ -6,7 +6,7 @@ const GRAIN = {
     speed: 1,
 
     // Overall opacity of the canvas overlay (0–1)
-    opacity: 0.18,
+    opacity: 0.1,
 
     // CSS mix-blend-mode — 'overlay' gives the most cinematic look;
     // try 'multiply', 'screen', or 'soft-light' for different moods
