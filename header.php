@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SU-F">
 
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=ThS7SU"></script>
+
     <title><?php echo get_bloginfo( 'name' ); ?></title>
 
     <?php wp_head(); ?>
