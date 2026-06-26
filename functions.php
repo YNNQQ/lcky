@@ -172,6 +172,15 @@ function enqueue_assets()
         true
     );
 
+    // Grain overlay
+    wp_enqueue_script(
+        'zone5-grain',
+        get_template_directory_uri() . '/assets/js/grain.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/grain.js'),
+        true
+    );
+
     // Expose color schemes to JS
     wp_localize_script(
         'zone5-script',
