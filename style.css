@@ -662,19 +662,27 @@ p:has(+ p) {
 }
 
 .section--form input[type="text"],
-.section--form input[type="email"] {
+.section--form input[type="text"]:hover,
+.section--form input[type="text"]:focus,
+.section--form input[type="email"],
+.section--form input[type="email"]:hover,
+.section--form input[type="email"]:focus,
+.section--form div:has(> input[role="combobox"]),
+.section--form div:has(> input[role="combobox"]):hover,
+.section--form div:has(> input[role="combobox"]):focus {
     border: none !important;
     border-bottom: 1px solid var(--scheme-text) !important;
+    outline: none !important;
+    box-shadow: none !important;
     padding: 0 !important;
     font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
     font-size: var(--text-sm) !important;
 }
 
-.section--form input[role="combobox"] {
-    border: none !important;
-    padding: 0 !important;
-    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
-    font-size: var(--text-sm) !important;
+.section--form div:has(> input[role="combobox"]),
+.section--form div:has(> input[role="combobox"]):hover,
+.section--form div:has(> input[role="combobox"]):focus {
+    border-bottom: 0 !important;
 }
 
 .section--form input[type="text"]::placeholder,
@@ -699,15 +707,26 @@ p:has(+ p) {
 }
 
 .section--form [id^="downshift"][id$="toggle-button"] svg {
-    fill: var(--scheme-text) !important;
-    width: 16px !important;
-    height: 16px !important;
+    display: none !important;
+}
+
+.section--form [id^="downshift"][id$="toggle-button"]::after {
+    content: "+";
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--scheme-text);
+    line-height: 1;
 }
 
 .section--form [role="listbox"] {
     background: var(--scheme-bg) !important;
     border: 1px solid var(--scheme-text) !important;
     border-top: none !important;
+}
+
+.section--form [role="listbox"]:has(div) {
+    border-top: 1px solid var(--scheme-text) !important;
 }
 
 .section--form fieldset:has(input[name^="legal_consent"]) {
@@ -721,18 +740,46 @@ p:has(+ p) {
 
 .section--form label svg:has(rect) {
     margin-right: 0 !important;
-    min-width: 18px !important;
-    width: 18px !important;
-    height: 18px !important;
+    min-width: var(--text-base) !important;
+    width: var(--text-base) !important;
+    height: var(--text-base) !important;
+    stroke: var(--scheme-text) !important;
 }
 
-.section--form .go1262198906 rect {
+.section--form rect {
     stroke: var(--scheme-text) !important;
     rx: 0 !important;
 }
 
 .section--form .go2365489600 polygon {
-    fill: var(--scheme-text) !important;
+    display: none !important;
+}
+
+.section--form .go2365489600 {
+    position: relative !important;
+}
+
+.section--form .go2365489600::after {
+    content: "";
+    position: absolute !important;
+    inset: 3px !important;
+    background: var(--scheme-text) !important;
+    display: none !important;
+}
+
+.klaviyo-form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>.needsclick {
+    display: flex !important;
+}
+
+form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first-child) {
+    position: absolute !important;
+    background: var(--scheme-accent) !important;
+    width: var(--text-base) !important;
+    height: var(--text-base) !important;
+}
+
+.section--form input[type="checkbox"]:checked + label .go2365489600::after {
+    display: block !important;
 }
 
 .section--form .go1709192310 {
@@ -740,8 +787,11 @@ p:has(+ p) {
     font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
 }
 
-.section--form .go1709192310:last-child {
-    color: var(--scheme-accent) !important;
+/* Asterisk after legal consent label text */
+.section--form fieldset:has(input[name^="legal_consent"]) .go1709192310::after {
+    content: "*";
+    color: var(--scheme-accent);
+    margin-left: 2px;
 }
 
 .go3487174770.go3487174770.go3487174770 {
