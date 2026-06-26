@@ -238,8 +238,6 @@ h1 {
     font-weight: 400;
     line-height: var(--leading-tight);
     text-transform: uppercase;
-    padding: 14px var(--space-3);
-    border: 1px solid var(--scheme-accent);
 }
 
 .h2,
@@ -249,8 +247,6 @@ h2 {
     font-weight: 400;
     line-height: var(--leading-tight);
     text-transform: uppercase;
-    padding: 14px var(--space-3);
-    border: 1px solid var(--scheme-accent);
 }
 
 .h3,
@@ -266,7 +262,8 @@ h3 {
 }
 
 .h4,
-h4 {
+h4,
+summary {
     font-size: var(--text-base);
     font-weight: 500;
     line-height: var(--leading-normal);
@@ -446,6 +443,19 @@ p:has(+ p) {
 
 /* Heading blocks */
 
+h1,
+.h1,
+h2,
+.h2 {
+    display: inline-block;
+    padding: 0px 10px 7px;
+    border: 2px solid var(--scheme-accent);
+    color: var(--scheme-accent);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--space-15);
+    line-height: 0.9;
+}
+
 .title {
     gap: calc(var(--space-1) / 2 + var(--space-2));
     color: var(--scheme-accent);
@@ -458,6 +468,7 @@ p:has(+ p) {
     margin-top: -0.18em;
     padding-bottom: 0.05em;
     margin-bottom: -0.12em;
+    line-height: var(--leading-tight);
 }
 
 .title .wp-block-group {
@@ -627,7 +638,7 @@ p:has(+ p) {
     gap: 0;
 }
 
-.section--event .wp-block-columns::after {
+/* .section--event .wp-block-columns::after {
     content: "+";
     position: absolute;
     top: 50%;
@@ -638,7 +649,7 @@ p:has(+ p) {
     font-weight: 400;
     line-height: 1;
     color: var(--scheme-accent);
-}
+} */
 
 /* #endregion SECTION: EVENT */
 
@@ -688,11 +699,10 @@ p:has(+ p) {
 .section--form input[type="text"]::placeholder,
 .section--form input[type="email"]::placeholder,
 .section--form input[role="combobox"]::placeholder {
-    color: var(--scheme-text) !important;
+    color: var(--scheme-opacity) !important;
     opacity: 1 !important;
     font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
     font-size: var(--text-sm) !important;
-    opacity: 0.66 !important;
 }
 
 .section--form .go1353235349> :first-child {
@@ -832,3 +842,46 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     justify-content: center;
     gap: var(--space-10);
 }
+
+/* #endregion SECTION: BANNER */
+
+
+/* ============================================================ */
+/* #region SECTION: FAQ */
+
+
+.section--faq .wp-block-details:not(:last-of-type) {
+    border-bottom: 1px solid var(--scheme-opacity);
+}
+
+.section--faq summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-8);
+    padding-block: calc(var(--space-5) / 2);
+}
+
+.section--faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.section--faq summary::after {
+    content: "+";
+    flex-shrink: 0;
+    color: var(--scheme-accent);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: 1;
+    transition: content var(--animation-base);
+}
+
+.section--faq details[open] > summary::after {
+    content: "—";
+}
+
+.section--faq details > p {
+    padding-bottom: var(--space-6);
+}
+
+/* #endregion SECTION: FAQ */
