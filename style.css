@@ -263,7 +263,8 @@ h3 {
 
 .h4,
 h4,
-summary {
+summary,
+.nav-menu a {
     font-size: var(--text-base);
     font-weight: 500;
     line-height: var(--leading-normal);
@@ -281,8 +282,7 @@ span {
 }
 
 .h5,
-h5,
-.nav-menu a {
+h5 {
     font-size: var(--text-sm);
     font-weight: 500;
     line-height: var(--leading-relaxed);
