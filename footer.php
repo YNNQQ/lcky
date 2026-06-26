@@ -7,6 +7,7 @@
             <?php wp_nav_menu([
                 'theme_location' => 'footer',
                 'container'      => false,
+                'items_wrap'     => '%3$s',
                 'walker'         => new Footer_Menu_Walker(),
             ]); ?>
         </div>
