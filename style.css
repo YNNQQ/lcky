@@ -78,6 +78,7 @@ Text Domain: zone5
     --width-4: 320px;
     --width-5: 400px;
     --width-6: 480px;
+    --width-9: 720px;
     --width-full: 100%;
 
     --section-padding-x: calc(var(--space-10) / 3 * 2);
@@ -395,6 +396,7 @@ p:has(+ p) {
     align-items: center;
     justify-content: center;
     font-size: var(--text-sm);
+    line-height: var(--leading-tight);
     cursor: pointer;
     background-color: transparent;
     padding: var(--space-1);
@@ -403,7 +405,7 @@ p:has(+ p) {
     outline: 1px solid var(--scheme-accent);
     border-bottom: none;
     position: relative;
-    transition: color var(--animation-hover);
+    transition: color var(--animation-base);
 }
 
 .button {
@@ -417,8 +419,29 @@ p:has(+ p) {
 
 .wp-element-button:hover,
 .button:hover {
-    color: var(--scheme-text);
+    background: var(--scheme-accent);
+    color: var(--scheme-solid-text);
 }
+
+.section--form .klaviyo-form-button {
+    background: transparent !important;
+    border: 1px solid var(--scheme-accent) !important;
+    color: var(--scheme-accent) !important;
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
+    font-size: var(--text-sm) !important;
+    font-weight: 500 !important;
+    padding: 1px var(--space-1) 0px !important;
+    border-radius: var(--border-radius-sm) !important;
+    margin: var(--space-5) auto calc(var(--space-5) / 2);
+    display: block !important;
+    transition: var(--animation-base) !important;
+}
+
+.section--form .klaviyo-form-button:hover {
+    background: var(--scheme-accent) !important;
+    color: var(--scheme-solid-text) !important;
+}
+
 
 
 /* Heading blocks */
@@ -546,7 +569,12 @@ p:has(+ p) {
     height: 100%;
 }
 
-/* #endregion SPLASH & SECTION--FULL & SECTION--STRIP */
+.section--center .section-container>.wp-block-columns>.wp-block-column {
+    max-width: var(--width-9);
+    margin: auto;
+}
+
+/* #endregion REPEATING SECTIONS */
 
 
 /* ============================================================ */
@@ -613,3 +641,120 @@ p:has(+ p) {
 }
 
 /* #endregion SECTION: EVENT */
+
+
+/* ============================================================ */
+/* #region SECTION: FORM */
+
+.section--form form>div {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--space-10) / 4) var(--space-10);
+    min-height: unset !important;
+}
+
+.section--form form>div> :nth-child(-n+2) {
+    margin-bottom: var(--space-5);
+}
+
+.section--form form>div>[data-testid="form-row"]:nth-child(n+5) {
+    grid-column: 1 / -1;
+}
+
+.section--form input[type="text"],
+.section--form input[type="email"] {
+    border: none !important;
+    border-bottom: 1px solid var(--scheme-text) !important;
+    padding: 0 !important;
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
+    font-size: var(--text-sm) !important;
+}
+
+.section--form input[role="combobox"] {
+    border: none !important;
+    padding: 0 !important;
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
+    font-size: var(--text-sm) !important;
+}
+
+.section--form input[type="text"]::placeholder,
+.section--form input[type="email"]::placeholder,
+.section--form input[role="combobox"]::placeholder {
+    color: var(--scheme-text) !important;
+    opacity: 1 !important;
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
+    font-size: var(--text-sm) !important;
+    opacity: 0.66 !important;
+}
+
+.section--form .go1353235349> :first-child {
+    padding: 0 !important;
+}
+
+.section--form [id^="downshift"][id$="toggle-button"] {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.section--form [id^="downshift"][id$="toggle-button"] svg {
+    fill: var(--scheme-text) !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.section--form [role="listbox"] {
+    background: var(--scheme-bg) !important;
+    border: 1px solid var(--scheme-text) !important;
+    border-top: none !important;
+}
+
+.section--form fieldset:has(input[name^="legal_consent"]) {
+    margin-top: var(--space-5) !important;
+}
+
+.section--form .klaviyo-checkboxes label {
+    align-items: flex-start !important;
+    gap: calc(var(--space-5) / 2);
+}
+
+.section--form label svg:has(rect) {
+    margin-right: 0 !important;
+    min-width: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.section--form .go1262198906 rect {
+    stroke: var(--scheme-text) !important;
+    rx: 0 !important;
+}
+
+.section--form .go2365489600 polygon {
+    fill: var(--scheme-text) !important;
+}
+
+.section--form .go1709192310 {
+    font-size: var(--text-xs) !important;
+    font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
+}
+
+.section--form .go1709192310:last-child {
+    color: var(--scheme-accent) !important;
+}
+
+.go3487174770.go3487174770.go3487174770 {
+    padding: 0 !important;
+}
+
+.section--form .klaviyo-form-richtext {
+    text-align: center !important;
+}
+
+.section--form .klaviyo-form-richtext p,
+.section--form .klaviyo-form-richtext span {
+    font-size: var(--text-xs) !important;
+}
+
+/* #endregion SECTION: FORM */
