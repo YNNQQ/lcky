@@ -458,7 +458,7 @@ h2,
     border: 2px solid var(--scheme-accent);
     color: var(--scheme-accent);
     border-radius: var(--border-radius-lg);
-    margin-bottom: var(--space-15);
+    margin: 0 auto var(--space-15);
     line-height: 0.9;
 }
 
@@ -589,6 +589,8 @@ h2,
 .section--center .section-container>.wp-block-columns>.wp-block-column {
     max-width: var(--width-9);
     margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* #endregion REPEATING SECTIONS */
@@ -868,17 +870,17 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     padding-block: calc(var(--space-5) / 2);
 }
 
+.section--faq details:open summary {
+    padding-bottom: calc(var(--space-5) / 2 * var(--leading-normal));
+}
+
 .section--faq summary::-webkit-details-marker {
     display: none;
 }
 
 .section--faq summary::after {
     content: "+";
-    flex-shrink: 0;
     color: var(--scheme-accent);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    line-height: 1;
     transition: content var(--animation-base);
 }
 
@@ -886,8 +888,34 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     content: "—";
 }
 
+.section--faq .wp-block-details {
+    interpolate-size: allow-keywords;
+}
+
+.section--faq .wp-block-details::details-content {
+    height: 0;
+    overflow: hidden;
+    transition:
+        height var(--animation-base),
+        content-visibility var(--animation-base) allow-discrete;
+}
+
+.section--faq .wp-block-details[open]::details-content {
+    height: auto;
+}
+
 .section--faq details > p {
-    padding-bottom: var(--space-6);
+    padding-bottom: calc(var(--space-5) / 2);
+    opacity: 0;
+    translate: 0 -4px;
+    transition:
+        opacity var(--animation-base),
+        translate var(--animation-base);
+}
+
+.section--faq details[open] > p {
+    opacity: 1;
+    translate: 0 0;
 }
 
 /* #endregion SECTION: FAQ */
