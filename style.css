@@ -394,12 +394,13 @@ p:has(+ p) {
     justify-content: center;
     font-size: var(--text-sm);
     line-height: var(--leading-tight);
+    font-weight: 500;
     cursor: pointer;
     background-color: transparent;
-    padding: var(--space-1);
-    border-radius: var(--border-radius-sm);
     color: var(--scheme-accent);
     outline: 1px solid var(--scheme-accent);
+    padding: var(--space-1);
+    border-radius: var(--border-radius-sm);
     border-bottom: none;
     position: relative;
     transition: color var(--animation-base);
@@ -421,16 +422,21 @@ p:has(+ p) {
 }
 
 .section--form .klaviyo-form-button {
+    all: unset !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: var(--text-sm) !important;
+    line-height: var(--leading-tight) !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
     background: transparent !important;
-    border: 1px solid var(--scheme-accent) !important;
+    border-radius: var(--border-radius-sm) !important;
     color: var(--scheme-accent) !important;
     font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
-    font-size: var(--text-sm) !important;
-    font-weight: 500 !important;
-    padding: 1px var(--space-1) 0px !important;
-    border-radius: var(--border-radius-sm) !important;
-    margin: var(--space-5) auto calc(var(--space-5) / 2);
-    display: block !important;
+    padding: var(--space-1) !important;
+    outline: 1px solid var(--scheme-accent) !important;
+    margin: var(--space-5) auto calc(var(--space-5) / 2) !important;
     transition: var(--animation-base) !important;
 }
 
