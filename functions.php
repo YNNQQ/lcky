@@ -307,7 +307,30 @@ add_filter('register_block_type_args', function ($args, $block_type) {
 
 
 // ============================================================
-// 7. TEMPLATE HELPER FUNCTIONS
+// 7. WALKERS
+// ============================================================
+
+class Footer_Menu_Walker extends Walker_Nav_Menu {
+    // Skip the <ul> and <li> wrappers — render bare <a> tags
+    public function start_lvl(&$output, $depth = 0, $args = null) {}
+    public function end_lvl(&$output, $depth = 0, $args = null) {}
+
+    public function start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0) {
+        $item    = $data_object;
+        $attrs   = [];
+        $href    = ! empty($item->url) ? esc_url($item->url) : '';
+        $target  = ! empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+        $rel     = ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+        $classes = implode(' ', array_filter((array) $item->classes));
+        $class   = $classes ? ' class="' . esc_attr($classes) . '"' : '';
+        $output .= '<a href="' . $href . '"' . $target . $rel . $class . '>' . esc_html($item->title) . '</a>';
+    }
+
+    public function end_el(&$output, $data_object, $depth = 0, $args = null) {}
+}
+
+// ============================================================
+// 8. TEMPLATE HELPER FUNCTIONS
 // ============================================================
 
 // Get page by slug

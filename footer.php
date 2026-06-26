@@ -7,7 +7,7 @@
             <?php wp_nav_menu([
                 'theme_location' => 'footer',
                 'container'      => false,
-                'menu_class'     => 'footer__menu footer__menu--legal',
+                'walker'         => new Footer_Menu_Walker(),
             ]); ?>
         </div>
 
