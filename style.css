@@ -521,17 +521,6 @@ h2,
     mix-blend-mode: difference;
 }
 
-.logo-clip {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 999;
-}
-
-.logo-clip > .header__logo {
-    pointer-events: auto;
-}
-
 .footer {
     position: relative;
 }
@@ -541,11 +530,8 @@ h2,
 }
 
 .header__logo svg path {
-    fill: var(--color-black);
-}
-
-.header__logo.on-dark svg path {
     fill: var(--color-white);
+    mix-blend-mode: difference;
 }
 
 .header-container ul {
@@ -902,6 +888,10 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     gap: var(--space-10);
 }
 
+.section--banner .wp-block-group figure {
+    max-width: calc(var(--space-20) * 2);
+}
+
 /* #endregion SECTION: BANNER */
 
 
@@ -970,3 +960,41 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
 }
 
 /* #endregion SECTION: FAQ */
+
+
+/* ============================================================ */
+/* #region POPUP */
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--section-padding-x);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--animation-base);
+}
+
+.popup-overlay--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup {
+    width: 100%;
+    max-width: var(--width-9);
+    padding: var(--section-padding);
+    position: relative;
+}
+
+body.popup-open {
+    overflow: hidden;
+}
+
+/* #endregion POPUP */
