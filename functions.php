@@ -324,7 +324,17 @@ class Footer_Menu_Walker extends Walker_Nav_Menu {
         $rel     = ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
         $classes = implode(' ', array_filter((array) $item->classes));
         $class   = $classes ? ' class="' . esc_attr($classes) . '"' : '';
-        $output .= '<a href="' . $href . '"' . $target . $rel . $class . '>' . esc_html($item->title) . '</a>';
+        $icon = '';
+
+        if (in_array('instagram', (array) $item->classes, true)) {
+            $icon_path = get_template_directory() . '/assets/svg/instagram.svg';
+
+            if (file_exists($icon_path)) {
+                $icon = file_get_contents($icon_path);
+            }
+        }
+
+        $output .= '<a href="' . $href . '"' . $target . $rel . $class . '>' . $icon . '<span>' . esc_html($item->title) . '</span></a>';
     }
 
     public function end_el(&$output, $data_object, $depth = 0, $args = null) {}

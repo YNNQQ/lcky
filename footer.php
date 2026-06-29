@@ -8,7 +8,7 @@
             'menu_class'     => 'footer__tagline',
         ]); ?>
 
-        <div class="footer__bottom grid--3">
+        <div class="footer__bottom">
             <p class="footer__copy">© <?php echo date('Y'); ?> ZONE5</p>
             <?php wp_nav_menu([
                 'theme_location' => 'footer',

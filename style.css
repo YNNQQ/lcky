@@ -301,12 +301,17 @@ h6,
     line-height: var(--leading-relaxed);
 }
 
-.footer__bottom :nth-child(2) {
+.footer__bottom .bold span {
     font-weight: 500;
 }
 
 p:has(+ p) {
     margin-bottom: calc(var(--text-base) * var(--leading-normal));
+}
+
+.bold,
+.bold * {
+    font-weight: 500;
 }
 
 /* #endregion TYPOGRAPHY */
@@ -579,14 +584,29 @@ h2,
 
 .footer__bottom {
     align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
-.footer__bottom> :nth-child(2) {
-    text-align: center;
+.footer__bottom> :nth-child(3) {
+    text-align: right;
 }
 
 .footer__bottom> :last-child {
     text-align: right;
+}
+
+.footer__bottom > :has(svg)  {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1ch;
+    align-items: center;
+}
+
+.footer__bottom svg {
+    width: var(--text-sm);
+    height: var(--text-sm);
+
 }
 
 .section--footer {
