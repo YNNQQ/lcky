@@ -144,3 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('main .section-container')
         .forEach(el => observer.observe(el));
 });
+
+if (window.matchMedia('(max-width: 781px)').matches) {
+    document.querySelectorAll('.title br').forEach(br => {
+        br.replaceWith(document.createTextNode(' '));
+    });
+}

@@ -18,7 +18,16 @@
             
         <section class="section section--hero section--full" data-header-theme="light">
             <div class="section-container">
-                <?php the_content_before_separator(); ?>
+                <div class="hero__content">
+                    <?php
+                        wp_nav_menu([
+                            'theme_location' => 'hero',
+                            'container'      => false,
+                            'menu_class'     => 'hero-menu'
+                        ]);
+                    ?>    
+                    <?php the_content_before_separator(); ?>
+                </div>
 
 
                 <div class="hero__container">
