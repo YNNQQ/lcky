@@ -146,6 +146,8 @@ main {
     flex-direction: column;
     isolation: isolate;
     position: relative;
+    z-index: 10;
+    margin-top: calc(var(--header-logo-height) * -1);
 }
 
 section:not(.section--hero) {
@@ -377,7 +379,8 @@ p:has(+ p) {
 }
 
 .footer-container {
-    padding: calc(var(--section-padding-y) * 2) var(--section-padding-x) var(--section-padding-x);
+    padding: calc(var(--section-padding-x) * 2) var(--section-padding-x) var(--section-padding-x);
+    /* padding: calc(var(--header-logo-height) + var(--section-padding-x) * 2) var(--section-padding-x) var(--section-padding-x); */
 }
 
 /* Blocks */
@@ -508,15 +511,15 @@ h2,
 .header {
     position: fixed;
     top: var(--section-padding-x);
-    z-index: 1;
+    z-index: 999;
     mix-blend-mode: difference;
 }
 
 .header__logo {
-    position: fixed;
-    bottom: var(--section-padding-x);
-    left: 50%;
-    transform: translateX(-50%);
+    position: sticky;
+    top: calc(100svh - var(--header-logo-height) - var(--section-padding-x));
+    align-self: center;
+    /* margin-bottom: calc(var(--header-logo-height) * -1); */
     z-index: 999;
     mix-blend-mode: difference;
 }
@@ -547,10 +550,6 @@ h2,
 
 /* FOOTER */
 
-.footer .header__logo svg path {
-    fill: var(--color-white);
-}
-
 .footer-container {
     display: flex;
     flex-direction: column;
@@ -572,6 +571,10 @@ h2,
 
 .footer__bottom> :last-child {
     text-align: right;
+}
+
+.section--footer {
+    height: calc(var(--space-20) / 1.5 + var(--header-logo-height));
 }
 
 

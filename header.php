@@ -29,16 +29,6 @@
             ]);
         ?>    
         
-        <?php if ( is_front_page() || is_home() ) : ?>
-            <a href="#home" class="header__logo">
-                <?php echo file_get_contents(get_template_directory() . '/assets/svg/logo.svg'); ?>
-            </a>
-        <?php else : ?>
-            <a href="<?php echo esc_url( home_url('/') ); ?>" class="header__logo">
-                <?php echo file_get_contents(get_template_directory() . '/assets/svg/logo.svg'); ?>
-            </a>
-        <?php endif; ?>
-
 
     </div>
 </header>

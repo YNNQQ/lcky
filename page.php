@@ -2,10 +2,17 @@
 
 <?php
     $front_page_id  =   get_option('page_on_front');
-    $approach_page  =   get_page_by_path('aanpak');
 ?>
 
 <main class="site-main scheme-red">
+
+    <?php if ( is_front_page() || is_home() ) : ?>
+        <a href="#home" class="header__logo">
+    <?php else : ?>
+        <a href="<?php echo esc_url( home_url('/') ); ?>" class="header__logo">
+    <?php endif; ?>
+        <?php echo file_get_contents(get_template_directory() . '/assets/svg/logo.svg'); ?>
+    </a>
 
     <?php if (is_front_page()): ?>
             
@@ -30,13 +37,14 @@
 
         <?php echo render_sections(get_the_content(), true); ?>
 
+        <section class="section section--footer scheme-red"></section>
     <?php endif?>
 
 
 </main>
 
 <?php
-$popup_page_id = get_page_id_by_slug('popup');
+$popup_page_id = get_page_id_by_slug('pop-up');
 if ($popup_page_id): ?>
 <div class="popup-overlay" id="popup-overlay" aria-hidden="true">
     <div class="popup scheme-black" role="dialog" aria-modal="true">
