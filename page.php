@@ -47,10 +47,8 @@
 $popup_page_id = get_page_id_by_slug('pop-up');
 if ($popup_page_id): ?>
 <div class="popup-overlay" id="popup-overlay" aria-hidden="true">
-    <div class="popup scheme-black" role="dialog" aria-modal="true">
-        <div class="popup__content">
-            <?php echo_page_content($popup_page_id); ?>
-        </div>
+    <div class="popup scheme-white" role="dialog" aria-modal="true">
+        <?php echo_page_content($popup_page_id); ?>
     </div>
 </div>
 <script>

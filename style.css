@@ -88,6 +88,7 @@ Text Domain: zone5
     /* Border radius */
     --border-radius-sm: 2px;
     --border-radius-lg: 6px;
+    --border-radius-xl: 9px;
 
     /* Transitions */
     --animation-base: 300ms ease;
@@ -396,7 +397,7 @@ p:has(+ p) {
 
 /* Buttons */
 
-.wp-block-button .wp-element-button {
+.wp-block-button:not(.is-style-outline) .wp-element-button {
     all: unset;
     display: inline-flex;
     align-items: center;
@@ -411,6 +412,21 @@ p:has(+ p) {
     padding: var(--space-1);
     border-radius: var(--border-radius-sm);
     border-bottom: none;
+    position: relative;
+    transition: var(--animation-base);
+}
+
+.wp-block-button.is-style-outline .wp-element-button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xs);
+    line-height: var(--leading-tight);
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--scheme-text);
     position: relative;
     transition: var(--animation-base);
 }
@@ -793,11 +809,13 @@ h2,
 
 .section--form .klaviyo-checkboxes label {
     align-items: flex-start !important;
-    gap: calc(var(--space-5) / 2);
+}
+
+.go4087926643 {
+    margin-right: calc(var(--space-5) / 2);
 }
 
 .section--form label svg:has(rect) {
-    margin-right: 0 !important;
     min-width: var(--text-base) !important;
     width: var(--text-base) !important;
     height: var(--text-base) !important;
@@ -972,9 +990,8 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -991,9 +1008,24 @@ form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first
 
 .popup {
     width: 100%;
+    height: fit-content;
     max-width: var(--width-9);
-    padding: var(--section-padding);
+    padding: var(--space-15) var(--section-padding-y);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xl);
+}
+
+.popup .wp-block-buttons:first-of-type {
+    margin-top: var(--space-5);
+}
+
+.popup * {
+    text-align: center;
 }
 
 body.popup-open {
@@ -1095,3 +1127,22 @@ body.popup-open {
 }
 
 /* #endregion COOKIE CONSENT */
+
+
+/* ============================================================ */
+/* #region MOBILE */
+
+@media (max-width: 781px) {
+    :root {
+        /* Typography - Sizes */
+        --text-sm: 12px;
+        --text-base: 15px;
+        --text-2xl: 48px;
+
+        --section-padding-x: calc(var(--space-10) / 3);
+        --section-padding-y: var(--space-10);
+
+        /* Component Tokens */
+        --header-logo-height: var(--space-8);
+    }
+}
