@@ -22,9 +22,17 @@
                 <?php the_content_before_separator(); ?>
 
 
-                <a href="#home" class="hero__logo">
-                    <?php echo file_get_contents(get_template_directory() . '/assets/svg/partner_logos.svg'); ?>
-                </a>    
+                <div class="hero__container">
+                    <!-- <a href="#home" class="hero__logo">
+                        <?php echo file_get_contents(get_template_directory() . '/assets/svg/partner_logos.svg'); ?>
+                    </a>     -->
+                    <a href="#home" class="hero__logo">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/svg/partner_logos.png" alt="Partner logos">
+                    </a>
+                    <h4>Present</h4>
+                </div>
+
+
             </div>
         </section>
 
