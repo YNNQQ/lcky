@@ -654,19 +654,43 @@ h2,
 
 .hero__container {
     position: absolute;
-    top: var(--section-padding-x);
+    top: calc(var(--section-padding-x) / 2);
     left: 50%;
     transform: translateX(-50%);
     justify-content: center;
     display: flex;
     flex-direction: column;
-    width: var(--space-24);
+    width: var(--space-32);
     z-index: 1;
+}
+
+.hero__container__logos {
+    display: flex;
+    align-items: center;
+}
+
+.hero__container__logos svg {
+    width: 100%;
+}
+
+.hero__container__logos .separator {
+    width: 1px;
+    align-self: stretch;
+    background-color: currentColor;
+    flex: 0 0 1px;
+    position: absolute;
+    height: 88px;
+    right: 47%;
+    transform: translate(50%);
 }
 
 .hero__container h4 {
     text-align: center;
     margin-top: var(--space-4);
+    position: absolute;
+    top: 100%;
+    right: 47%;
+    transform: translate(50%);
 }
 
 /* .section--hero .hero__logo {
@@ -1205,6 +1229,7 @@ body.popup-open {
 
     .section--form .klaviyo-form-button {
         padding: var(--space-1) var(--space-1) 5px !important;
+        margin-bottom: 0 !important;
         transition: unset !important;
     }
 
@@ -1316,6 +1341,7 @@ body.popup-open {
         justify-content: center;
         align-content: center;
         gap: calc(var(--space-24) * 2 + var(--space-2));
+        padding-inline: var(--section-padding-x);
     }
 
     .section--hero .wp-block-columns {
@@ -1402,165 +1428,30 @@ body.popup-open {
     /* #region SECTION: FORM */
 
     .section--form form>div {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        gap: calc(var(--space-10) / 4) var(--space-10);
-        min-height: unset !important;
+        grid-template-columns: 1fr;
+        gap: calc(var(--space-10) / 4);
     }
 
-    .section--form form>div> :nth-child(-n+2) {
-        margin-bottom: var(--space-5);
+    .section--form form>div> :nth-child(-n+4) {
+        margin-bottom: calc(var(--space-5) / 4);
     }
 
-    .section--form form>div>[data-testid="form-row"]:nth-child(n+5) {
-        grid-column: 1 / -1;
-    }
-
-    .section--form input[type="text"],
-    .section--form input[type="text"]:hover,
-    .section--form input[type="text"]:focus,
-    .section--form input[type="email"],
-    .section--form input[type="email"]:hover,
-    .section--form input[type="email"]:focus,
-    .section--form div:has(> input[role="combobox"]),
-    .section--form div:has(> input[role="combobox"]):hover,
-    .section--form div:has(> input[role="combobox"]):focus {
-        border: none !important;
-        border-bottom: 1px solid var(--scheme-text) !important;
-        outline: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
-        font-size: var(--text-sm) !important;
-    }
-
-    .section--form div:has(> input[role="combobox"]),
-    .section--form div:has(> input[role="combobox"]):hover,
-    .section--form div:has(> input[role="combobox"]):focus {
-        border-bottom: 0 !important;
-    }
-
-    .section--form input[type="text"]::placeholder,
-    .section--form input[type="email"]::placeholder,
-    .section--form input[role="combobox"]::placeholder {
-        color: var(--scheme-opacity) !important;
-        opacity: 1 !important;
-        font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
-        font-size: var(--text-sm) !important;
-    }
-
-    .section--form .go1353235349> :first-child {
-        padding: 0 !important;
-    }
-
-    .section--form [id^="downshift"][id$="toggle-button"] {
-        position: absolute !important;
-        right: 0 !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-    }
-
-    .section--form [id^="downshift"][id$="toggle-button"] svg {
-        display: none !important;
-    }
-
-    .section--form [id^="downshift"][id$="toggle-button"]::after {
-        content: "+";
-        font-family: "MonoSpec", Arial, Helvetica, sans-serif;
-        font-size: var(--text-sm);
-        font-weight: 500;
-        color: var(--scheme-text);
-        line-height: 1;
-    }
-
-    .section--form [role="listbox"] {
-        background: var(--scheme-bg) !important;
-        border: 1px solid var(--scheme-text) !important;
-        border-top: none !important;
-    }
-
-    .section--form [role="listbox"]:has(div) {
-        border-top: 1px solid var(--scheme-text) !important;
-    }
 
     .section--form fieldset:has(input[name^="legal_consent"]) {
-        margin-top: var(--space-5) !important;
-    }
-
-    .section--form .klaviyo-checkboxes label {
-        align-items: flex-start !important;
+        margin-top: calc(var(--space-5) / 2) !important;
     }
 
     .go4087926643 {
-        margin-right: calc(var(--space-5) / 2);
+        margin-right: calc(var(--space-3) / 2) !important;
     }
 
-    .section--form label svg:has(rect) {
-        min-width: var(--text-base) !important;
-        width: var(--text-base) !important;
-        height: var(--text-base) !important;
-        stroke: var(--scheme-text) !important;
-    }
-
-    .section--form rect {
-        stroke: var(--scheme-text) !important;
-        rx: 0 !important;
-    }
-
-    .section--form .go2365489600 polygon {
-        display: none !important;
-    }
-
-    .section--form .go2365489600 {
-        position: relative !important;
-    }
-
-    .section--form .go2365489600::after {
-        content: "";
-        position: absolute !important;
-        inset: 3px !important;
-        background: var(--scheme-text) !important;
-        display: none !important;
-    }
-
-    .klaviyo-form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>.needsclick {
-        display: flex !important;
-    }
-
-    form.klaviyo-form.klaviyo-form input[type=checkbox]:checked+label>svg:not(:first-child) {
-        position: absolute !important;
-        background: var(--scheme-accent) !important;
-        width: var(--text-base) !important;
-        height: var(--text-base) !important;
-    }
-
-    .section--form input[type="checkbox"]:checked+label .go2365489600::after {
-        display: block !important;
-    }
-
-    .section--form .go1709192310 {
-        font-size: var(--text-xs) !important;
-        font-family: "MonoSpec", Arial, Helvetica, sans-serif !important;
-    }
-
-    /* Asterisk after legal consent label text */
     .section--form fieldset:has(input[name^="legal_consent"]) .go1709192310::after {
-        content: "*";
-        color: var(--scheme-accent);
         margin-left: 2px;
     }
 
-    .go3487174770.go3487174770.go3487174770 {
+    .go3487174770.go3487174770.go3487174770,
+    .kl-private-reset-css-Xuajs1 label {
         padding: 0 !important;
-    }
-
-    .section--form .klaviyo-form-richtext {
-        text-align: center !important;
-    }
-
-    .section--form .klaviyo-form-richtext p,
-    .section--form .klaviyo-form-richtext span {
-        font-size: var(--text-xs) !important;
     }
 
     /* #endregion SECTION: FORM */
@@ -1569,28 +1460,20 @@ body.popup-open {
     /* ============================================================ */
     /* #region SECTION: BANNER */
 
-    .section--banner .wp-block-column {
-        position: relative;
-    }
-
     .section--banner .wp-block-group {
-        position: absolute;
-        inset: 0;
-        top: 0;
-        display: flex;
-        justify-content: center;
+        padding-inline: var(--section-padding-x);
     }
 
     .section--banner .wp-block-group__inner-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: var(--space-10);
+        gap: var(--space-5);
     }
 
     .section--banner .wp-block-group figure {
-        max-width: calc(var(--space-20) * 2);
+        max-width: calc(var(--space-10) * 3);
+    }
+
+    .section--banner p {
+        text-align: center;
     }
 
     /* #endregion SECTION: BANNER */
@@ -1600,64 +1483,9 @@ body.popup-open {
     /* #region SECTION: FAQ */
 
 
-    .section--faq .wp-block-details:not(:last-of-type) {
-        border-bottom: 1px solid var(--scheme-opacity);
-    }
-
     .section--faq summary {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: var(--space-8);
+        gap: calc(var(--space-5) / 2);
         padding-block: calc(var(--space-5) / 2);
-    }
-
-    .section--faq details:open summary {
-        padding-bottom: calc(var(--space-5) / 2 * var(--leading-normal));
-    }
-
-    .section--faq summary::-webkit-details-marker {
-        display: none;
-    }
-
-    .section--faq summary::after {
-        content: "+";
-        color: var(--scheme-accent);
-        transition: content var(--animation-base);
-    }
-
-    .section--faq details[open]>summary::after {
-        content: "—";
-    }
-
-    .section--faq .wp-block-details {
-        interpolate-size: allow-keywords;
-    }
-
-    .section--faq .wp-block-details::details-content {
-        height: 0;
-        overflow: hidden;
-        transition:
-            height var(--animation-base),
-            content-visibility var(--animation-base) allow-discrete;
-    }
-
-    .section--faq .wp-block-details[open]::details-content {
-        height: auto;
-    }
-
-    .section--faq details>p {
-        padding-bottom: calc(var(--space-5) / 2);
-        opacity: 0;
-        translate: 0 -4px;
-        transition:
-            opacity var(--animation-base),
-            translate var(--animation-base);
-    }
-
-    .section--faq details[open]>p {
-        opacity: 1;
-        translate: 0 0;
     }
 
     /* #endregion SECTION: FAQ */
@@ -1666,50 +1494,13 @@ body.popup-open {
     /* ============================================================ */
     /* #region POPUP */
 
-    .popup-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: var(--section-padding-x);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity var(--animation-base);
-    }
-
-    .popup-overlay--visible {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
     .popup {
-        width: 100%;
-        height: fit-content;
-        max-width: var(--width-9);
-        padding: var(--space-15) var(--section-padding-y);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-5);
-        justify-content: center;
-        align-items: center;
-        border-radius: var(--border-radius-xl);
+        padding: calc(var(--space-5) / 2 * 3) var(--space-10);
+        gap: calc(var(--space-5) / 2);
     }
 
     .popup .wp-block-buttons:first-of-type {
-        margin-top: var(--space-5);
-    }
-
-    .popup * {
-        text-align: center;
-    }
-
-    body.popup-open {
-        overflow: hidden;
+        margin-top: calc(var(--space-5) / 2);
     }
 
     /* #endregion POPUP */
