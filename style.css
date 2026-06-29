@@ -1063,4 +1063,32 @@ body.popup-open {
     color: var(--color-white) !important;
 }
 
+/* Consent preferences */
+
+.cky-always-active,
+.cky-show-desc-btn {
+    color: var(--color-red) !important;
+}
+
+.cky-prefrence-btn-wrapper {
+    gap: 20px;
+}
+
+.cky-accordion-btn {
+    font-size: var(--text-sm) !important;
+    font-weight: 500 !important;
+    line-height: var(--leading-relaxed) !important;
+}
+
+.cky-accordion-header-des,
+.cky-accordion-header-des * {
+    font-size: var(--text-xs) !important;
+    font-weight: 100 !important;
+    line-height: var(--leading-relaxed) !important;
+}
+
+.cky-btn-revisit-wrapper {
+    display: none !important;
+}
+
 /* #endregion COOKIE CONSENT */
